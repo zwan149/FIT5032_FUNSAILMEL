@@ -5,3 +5,25 @@
 <h3>@ViewBag.Message</h3>
 
 <p>Use this area to provide additional information.</p>
+
+<div class="container">
+    <h1>Bootstrap datepicker</h1>
+    <div class="input-group date">
+        <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+    </div>
+</div>
+@section scripts{
+    <link href="~/Content/bootstrap-datepicker3.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script type='text/javascript'>
+    $(function () {
+        $('.input-group.date').datepicker({
+            calendarWeeks: true,
+            todayHighlight: true,
+            autoclose: true
+        });
+    });
+
+    </script>
+
+}

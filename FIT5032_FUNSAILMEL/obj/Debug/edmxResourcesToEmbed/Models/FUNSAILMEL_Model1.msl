@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FUNSAILMEL_Model1StoreContainer" CdmEntityContainer="FUNSAILMEL_Model1Container">
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="IsTypeOf(FUNSAILMEL_Model1.Customer)">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BoatOwners">
+      <EntityTypeMapping TypeName="IsTypeOf(FUNSAILMEL_Model1.BoatOwner)">
+        <MappingFragment StoreEntitySet="BoatOwners">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Boats">
+      <EntityTypeMapping TypeName="IsTypeOf(FUNSAILMEL_Model1.Boat)">
+        <MappingFragment StoreEntitySet="Boats">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BoatName" ColumnName="BoatName" />
+          <ScalarProperty Name="BoatType" ColumnName="BoatType" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Colour" ColumnName="Colour" />
+          <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+          <ScalarProperty Name="BoatOwnerId" ColumnName="BoatOwnerId" />
+          <ScalarProperty Name="PierId" ColumnName="PierId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bookings">
+      <EntityTypeMapping TypeName="IsTypeOf(FUNSAILMEL_Model1.Booking)">
+        <MappingFragment StoreEntitySet="Bookings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="BoatId" ColumnName="BoatId" />
+          <ScalarProperty Name="Review" ColumnName="Review" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Piers">
+      <EntityTypeMapping TypeName="IsTypeOf(FUNSAILMEL_Model1.Pier)">
+        <MappingFragment StoreEntitySet="Piers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PierName" ColumnName="PierName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="IsTypeOf(FUNSAILMEL_Model1.Admin)">
+        <MappingFragment StoreEntitySet="Admins">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

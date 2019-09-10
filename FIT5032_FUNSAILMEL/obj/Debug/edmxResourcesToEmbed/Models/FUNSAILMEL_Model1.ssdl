@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FUNSAILMEL_Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="FUNSAILMEL_Model1StoreContainer">
+    <EntitySet Name="Customers" EntityType="FUNSAILMEL_Model1.Store.Customers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BoatOwners" EntityType="FUNSAILMEL_Model1.Store.BoatOwners" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Boats" EntityType="FUNSAILMEL_Model1.Store.Boats" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Bookings" EntityType="FUNSAILMEL_Model1.Store.Bookings" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Piers" EntityType="FUNSAILMEL_Model1.Store.Piers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Admins" EntityType="FUNSAILMEL_Model1.Store.Admins" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CustomerBooking" Association="FUNSAILMEL_Model1.Store.CustomerBooking">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Booking" EntitySet="Bookings" />
+    </AssociationSet>
+    <AssociationSet Name="BoatBoatOwner" Association="FUNSAILMEL_Model1.Store.BoatBoatOwner">
+      <End Role="Boat" EntitySet="Boats" />
+      <End Role="BoatOwner" EntitySet="BoatOwners" />
+    </AssociationSet>
+    <AssociationSet Name="BoatBooking" Association="FUNSAILMEL_Model1.Store.BoatBooking">
+      <End Role="Boat" EntitySet="Boats" />
+      <End Role="Booking" EntitySet="Bookings" />
+    </AssociationSet>
+    <AssociationSet Name="BoatPier" Association="FUNSAILMEL_Model1.Store.BoatPier">
+      <End Role="Boat" EntitySet="Boats" />
+      <End Role="Pier" EntitySet="Piers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BoatOwners">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ContactPerson" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ContactPhone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Boats">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BoatName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BoatType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Year" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Colour" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Capacity" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BoatOwnerId" Type="int" Nullable="false" />
+    <Property Name="PierId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Bookings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+    <Property Name="BoatId" Type="int" Nullable="false" />
+    <Property Name="Review" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Piers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PierName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Admins">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="CustomerBooking">
+    <End Role="Customer" Type="FUNSAILMEL_Model1.Store.Customers" Multiplicity="1" />
+    <End Role="Booking" Type="FUNSAILMEL_Model1.Store.Bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BoatBoatOwner">
+    <End Role="Boat" Type="FUNSAILMEL_Model1.Store.Boats" Multiplicity="*" />
+    <End Role="BoatOwner" Type="FUNSAILMEL_Model1.Store.BoatOwners" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="BoatOwner">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Boat">
+        <PropertyRef Name="BoatOwnerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BoatBooking">
+    <End Role="Boat" Type="FUNSAILMEL_Model1.Store.Boats" Multiplicity="1" />
+    <End Role="Booking" Type="FUNSAILMEL_Model1.Store.Bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Boat">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="BoatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BoatPier">
+    <End Role="Boat" Type="FUNSAILMEL_Model1.Store.Boats" Multiplicity="*" />
+    <End Role="Pier" Type="FUNSAILMEL_Model1.Store.Piers" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Pier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Boat">
+        <PropertyRef Name="PierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

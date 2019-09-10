@@ -1,0 +1,367 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FUNSAILMEL_Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="FUNSAILMEL_Model1StoreContainer">
+    <EntitySet Name="Customers" EntityType="FUNSAILMEL_Model1.Store.Customers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BoatOwners" EntityType="FUNSAILMEL_Model1.Store.BoatOwners" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Boats" EntityType="FUNSAILMEL_Model1.Store.Boats" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Bookings" EntityType="FUNSAILMEL_Model1.Store.Bookings" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Piers" EntityType="FUNSAILMEL_Model1.Store.Piers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Admins" EntityType="FUNSAILMEL_Model1.Store.Admins" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CustomerBooking" Association="FUNSAILMEL_Model1.Store.CustomerBooking">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Booking" EntitySet="Bookings" />
+    </AssociationSet>
+    <AssociationSet Name="BoatBoatOwner" Association="FUNSAILMEL_Model1.Store.BoatBoatOwner">
+      <End Role="Boat" EntitySet="Boats" />
+      <End Role="BoatOwner" EntitySet="BoatOwners" />
+    </AssociationSet>
+    <AssociationSet Name="BoatBooking" Association="FUNSAILMEL_Model1.Store.BoatBooking">
+      <End Role="Boat" EntitySet="Boats" />
+      <End Role="Booking" EntitySet="Bookings" />
+    </AssociationSet>
+    <AssociationSet Name="BoatPier" Association="FUNSAILMEL_Model1.Store.BoatPier">
+      <End Role="Boat" EntitySet="Boats" />
+      <End Role="Pier" EntitySet="Piers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BoatOwners">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ContactPerson" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ContactPhone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Boats">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BoatName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BoatType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Year" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Colour" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Capacity" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BoatOwnerId" Type="int" Nullable="false" />
+    <Property Name="PierId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Bookings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+    <Property Name="BoatId" Type="int" Nullable="false" />
+    <Property Name="Review" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Piers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PierName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Admins">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="CustomerBooking">
+    <End Role="Customer" Type="FUNSAILMEL_Model1.Store.Customers" Multiplicity="1" />
+    <End Role="Booking" Type="FUNSAILMEL_Model1.Store.Bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BoatBoatOwner">
+    <End Role="Boat" Type="FUNSAILMEL_Model1.Store.Boats" Multiplicity="*" />
+    <End Role="BoatOwner" Type="FUNSAILMEL_Model1.Store.BoatOwners" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="BoatOwner">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Boat">
+        <PropertyRef Name="BoatOwnerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BoatBooking">
+    <End Role="Boat" Type="FUNSAILMEL_Model1.Store.Boats" Multiplicity="1" />
+    <End Role="Booking" Type="FUNSAILMEL_Model1.Store.Bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Boat">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="BoatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BoatPier">
+    <End Role="Boat" Type="FUNSAILMEL_Model1.Store.Boats" Multiplicity="*" />
+    <End Role="Pier" Type="FUNSAILMEL_Model1.Store.Piers" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Pier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Boat">
+        <PropertyRef Name="PierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="FUNSAILMEL_Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="FUNSAILMEL_Model1Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="FUNSAILMEL_Model1.Customer" />
+          <EntitySet Name="BoatOwners" EntityType="FUNSAILMEL_Model1.BoatOwner" />
+          <EntitySet Name="Boats" EntityType="FUNSAILMEL_Model1.Boat" />
+          <EntitySet Name="Bookings" EntityType="FUNSAILMEL_Model1.Booking" />
+          <AssociationSet Name="CustomerBooking" Association="FUNSAILMEL_Model1.CustomerBooking">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="BoatBoatOwner" Association="FUNSAILMEL_Model1.BoatBoatOwner">
+            <End Role="Boat" EntitySet="Boats" />
+            <End Role="BoatOwner" EntitySet="BoatOwners" />
+          </AssociationSet>
+          <AssociationSet Name="BoatBooking" Association="FUNSAILMEL_Model1.BoatBooking">
+            <End Role="Boat" EntitySet="Boats" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <EntitySet Name="Piers" EntityType="FUNSAILMEL_Model1.Pier" />
+          <AssociationSet Name="BoatPier" Association="FUNSAILMEL_Model1.BoatPier">
+            <End Role="Boat" EntitySet="Boats" />
+            <End Role="Pier" EntitySet="Piers" />
+          </AssociationSet>
+          <EntitySet Name="Admins" EntityType="FUNSAILMEL_Model1.Admin" />
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" />
+          <Property Name="LastName" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BoatOwner">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="ContactPerson" Type="String" Nullable="false" />
+          <Property Name="ContactPhone" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Boat">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BoatName" Type="String" Nullable="false" />
+          <Property Name="BoatType" Type="String" Nullable="false" />
+          <Property Name="Year" Type="String" Nullable="false" />
+          <Property Name="Colour" Type="String" Nullable="false" />
+          <Property Name="Capacity" Type="String" Nullable="false" />
+          <Property Name="BoatOwnerId" Type="Int32" Nullable="false" />
+          <Property Name="PierId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Booking">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="String" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="BoatId" Type="Int32" Nullable="false" />
+          <Property Name="Review" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="CustomerBooking">
+          <End Type="FUNSAILMEL_Model1.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="FUNSAILMEL_Model1.Booking" Role="Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BoatBoatOwner">
+          <End Type="FUNSAILMEL_Model1.Boat" Role="Boat" Multiplicity="*" />
+          <End Type="FUNSAILMEL_Model1.BoatOwner" Role="BoatOwner" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="BoatOwner">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Boat">
+              <PropertyRef Name="BoatOwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BoatBooking">
+          <End Type="FUNSAILMEL_Model1.Boat" Role="Boat" Multiplicity="1" />
+          <End Type="FUNSAILMEL_Model1.Booking" Role="Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Boat">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="BoatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Pier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PierName" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="BoatPier">
+          <End Type="FUNSAILMEL_Model1.Boat" Role="Boat" Multiplicity="*" />
+          <End Type="FUNSAILMEL_Model1.Pier" Role="Pier" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Pier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Boat">
+              <PropertyRef Name="PierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Password" Type="String" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FUNSAILMEL_Model1StoreContainer" CdmEntityContainer="FUNSAILMEL_Model1Container">
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="IsTypeOf(FUNSAILMEL_Model1.Customer)">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BoatOwners">
+      <EntityTypeMapping TypeName="IsTypeOf(FUNSAILMEL_Model1.BoatOwner)">
+        <MappingFragment StoreEntitySet="BoatOwners">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Boats">
+      <EntityTypeMapping TypeName="IsTypeOf(FUNSAILMEL_Model1.Boat)">
+        <MappingFragment StoreEntitySet="Boats">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BoatName" ColumnName="BoatName" />
+          <ScalarProperty Name="BoatType" ColumnName="BoatType" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Colour" ColumnName="Colour" />
+          <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+          <ScalarProperty Name="BoatOwnerId" ColumnName="BoatOwnerId" />
+          <ScalarProperty Name="PierId" ColumnName="PierId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bookings">
+      <EntityTypeMapping TypeName="IsTypeOf(FUNSAILMEL_Model1.Booking)">
+        <MappingFragment StoreEntitySet="Bookings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="BoatId" ColumnName="BoatId" />
+          <ScalarProperty Name="Review" ColumnName="Review" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Piers">
+      <EntityTypeMapping TypeName="IsTypeOf(FUNSAILMEL_Model1.Pier)">
+        <MappingFragment StoreEntitySet="Piers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PierName" ColumnName="PierName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="IsTypeOf(FUNSAILMEL_Model1.Admin)">
+        <MappingFragment StoreEntitySet="Admins">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
