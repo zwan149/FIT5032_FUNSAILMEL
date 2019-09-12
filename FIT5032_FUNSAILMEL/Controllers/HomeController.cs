@@ -20,6 +20,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Administrator")]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
