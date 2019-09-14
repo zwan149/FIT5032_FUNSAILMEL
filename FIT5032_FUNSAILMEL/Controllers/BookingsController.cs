@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FIT5032_FUNSAILMEL.Models;
+using Microsoft.AspNet.Identity;
 
 namespace FIT5032_FUNSAILMEL.Controllers
 {
@@ -15,9 +16,14 @@ namespace FIT5032_FUNSAILMEL.Controllers
         private FUNSAILMEL_Model1Container db = new FUNSAILMEL_Model1Container();
 
         // GET: Bookings
+        [Authorize]
         public ActionResult Index()
         {
-            return View(db.Bookings.ToList());
+            var userId = User.Identity.GetUserId();
+
+            var bookings = db.Bookings.Where(s => s.CustomerId == userId).ToList();
+
+            return View(bookings);
         }
 
         // GET: Bookings/Details/5
@@ -38,6 +44,8 @@ namespace FIT5032_FUNSAILMEL.Controllers
         // GET: Bookings/Create
         public ActionResult Create()
         {
+            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "Id", "Email");
+            ViewBag.BoatId = new SelectList(db.Boats, "Id", "BoatName");
             return View();
         }
 
@@ -46,8 +54,14 @@ namespace FIT5032_FUNSAILMEL.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Date,CustomerId,BoatId,Review")] Booking booking)
+        [Authorize]
+        public ActionResult Create([Bind(Include = "Id,Date,BoatId,Review")] Booking booking)
         {
+            booking.CustomerId = User.Identity.GetUserId();
+
+            ModelState.Clear();
+            TryValidateModel(booking);
+
             if (ModelState.IsValid)
             {
                 db.Bookings.Add(booking);
@@ -55,6 +69,8 @@ namespace FIT5032_FUNSAILMEL.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "Id", "Email", booking.CustomerId);
+            ViewBag.BoatId = new SelectList(db.Boats, "Id", "BoatName", booking.BoatId);
             return View(booking);
         }
 
@@ -70,6 +86,8 @@ namespace FIT5032_FUNSAILMEL.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "Id", "Email", booking.CustomerId);
+            ViewBag.BoatId = new SelectList(db.Boats, "Id", "BoatName", booking.BoatId);
             return View(booking);
         }
 
@@ -86,6 +104,8 @@ namespace FIT5032_FUNSAILMEL.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "Id", "Email", booking.CustomerId);
+            ViewBag.BoatId = new SelectList(db.Boats, "Id", "BoatName", booking.BoatId);
             return View(booking);
         }
 

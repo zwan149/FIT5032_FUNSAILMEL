@@ -14,13 +14,24 @@ namespace FIT5032_FUNSAILMEL.Models
     
     public partial class Boat
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Boat()
+        {
+            this.Bookings = new HashSet<Booking>();
+        }
+    
         public int Id { get; set; }
         public string BoatName { get; set; }
         public string BoatType { get; set; }
-        public string Year { get; set; }
+        public int Year { get; set; }
         public string Colour { get; set; }
-        public string Capacity { get; set; }
-        public int BoatOwnerId { get; set; }
+        public int Capacity { get; set; }
+        public string BoatOwnerId { get; set; }
         public int PierId { get; set; }
+    
+        public virtual AspNetUser AspNetUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Booking> Bookings { get; set; }
+        public virtual Pier Pier { get; set; }
     }
 }

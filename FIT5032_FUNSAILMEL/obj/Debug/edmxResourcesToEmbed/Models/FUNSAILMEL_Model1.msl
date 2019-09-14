@@ -1,70 +1,102 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="FUNSAILMEL_Model1StoreContainer" CdmEntityContainer="FUNSAILMEL_Model1Container">
-    <EntitySetMapping Name="Customers">
-      <EntityTypeMapping TypeName="IsTypeOf(FUNSAILMEL_Model1.Customer)">
-        <MappingFragment StoreEntitySet="Customers">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="FUNSAILMEL_Model1.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="BoatOwners">
-      <EntityTypeMapping TypeName="IsTypeOf(FUNSAILMEL_Model1.BoatOwner)">
-        <MappingFragment StoreEntitySet="BoatOwners">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="FUNSAILMEL_Model1.AspNetRole">
+        <MappingFragment StoreEntitySet="AspNetRoles">
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="FUNSAILMEL_Model1.AspNetUserClaim">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="FUNSAILMEL_Model1.AspNetUserLogin">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="FUNSAILMEL_Model1.AspNetUser">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="PreferName" ColumnName="PreferName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
           <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
-          <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Boats">
-      <EntityTypeMapping TypeName="IsTypeOf(FUNSAILMEL_Model1.Boat)">
+      <EntityTypeMapping TypeName="FUNSAILMEL_Model1.Boat">
         <MappingFragment StoreEntitySet="Boats">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="BoatName" ColumnName="BoatName" />
-          <ScalarProperty Name="BoatType" ColumnName="BoatType" />
-          <ScalarProperty Name="Year" ColumnName="Year" />
-          <ScalarProperty Name="Colour" ColumnName="Colour" />
-          <ScalarProperty Name="Capacity" ColumnName="Capacity" />
-          <ScalarProperty Name="BoatOwnerId" ColumnName="BoatOwnerId" />
           <ScalarProperty Name="PierId" ColumnName="PierId" />
+          <ScalarProperty Name="BoatOwnerId" ColumnName="BoatOwnerId" />
+          <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+          <ScalarProperty Name="Colour" ColumnName="Colour" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="BoatType" ColumnName="BoatType" />
+          <ScalarProperty Name="BoatName" ColumnName="BoatName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Bookings">
-      <EntityTypeMapping TypeName="IsTypeOf(FUNSAILMEL_Model1.Booking)">
+      <EntityTypeMapping TypeName="FUNSAILMEL_Model1.Booking">
         <MappingFragment StoreEntitySet="Bookings">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-          <ScalarProperty Name="BoatId" ColumnName="BoatId" />
           <ScalarProperty Name="Review" ColumnName="Review" />
+          <ScalarProperty Name="BoatId" ColumnName="BoatId" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Piers">
-      <EntityTypeMapping TypeName="IsTypeOf(FUNSAILMEL_Model1.Pier)">
+      <EntityTypeMapping TypeName="FUNSAILMEL_Model1.Pier">
         <MappingFragment StoreEntitySet="Piers">
-          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="PierName" ColumnName="PierName" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Admins">
-      <EntityTypeMapping TypeName="IsTypeOf(FUNSAILMEL_Model1.Admin)">
-        <MappingFragment StoreEntitySet="Admins">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="FUNSAILMEL_Model1.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+      <EndProperty Name="AspNetUser">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+      <EndProperty Name="AspNetRole">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

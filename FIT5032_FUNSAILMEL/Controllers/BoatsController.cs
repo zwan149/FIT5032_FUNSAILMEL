@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FIT5032_FUNSAILMEL.Models;
+using Microsoft.AspNet.Identity;
 
 namespace FIT5032_FUNSAILMEL.Controllers
 {
@@ -15,9 +16,14 @@ namespace FIT5032_FUNSAILMEL.Controllers
         private FUNSAILMEL_Model1Container db = new FUNSAILMEL_Model1Container();
 
         // GET: Boats
+        [Authorize]
         public ActionResult Index()
         {
-            return View(db.Boats.ToList());
+            var userId = User.Identity.GetUserId();
+
+            var boats = db.Boats.Where(s => s.BoatOwnerId == userId).ToList();
+
+            return View(boats);
         }
 
         // GET: Boats/Details/5
@@ -38,6 +44,8 @@ namespace FIT5032_FUNSAILMEL.Controllers
         // GET: Boats/Create
         public ActionResult Create()
         {
+            ViewBag.BoatOwnerId = new SelectList(db.AspNetUsers, "Id", "Email");
+            ViewBag.PierId = new SelectList(db.Piers, "Id", "PierName");
             return View();
         }
 
@@ -46,8 +54,14 @@ namespace FIT5032_FUNSAILMEL.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,BoatName,BoatType,Year,Colour,Capacity,BoatOwnerId,PierId")] Boat boat)
+        [Authorize]
+        public ActionResult Create([Bind(Include = "Id,BoatName,BoatType,Year,Colour,Capacity,PierId")] Boat boat)
         {
+            boat.BoatOwnerId = User.Identity.GetUserId();
+
+            ModelState.Clear();
+            TryValidateModel(boat);
+
             if (ModelState.IsValid)
             {
                 db.Boats.Add(boat);
@@ -55,6 +69,8 @@ namespace FIT5032_FUNSAILMEL.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.BoatOwnerId = new SelectList(db.AspNetUsers, "Id", "Email", boat.BoatOwnerId);
+            ViewBag.PierId = new SelectList(db.Piers, "Id", "PierName", boat.PierId);
             return View(boat);
         }
 
@@ -70,6 +86,8 @@ namespace FIT5032_FUNSAILMEL.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.BoatOwnerId = new SelectList(db.AspNetUsers, "Id", "Email", boat.BoatOwnerId);
+            ViewBag.PierId = new SelectList(db.Piers, "Id", "PierName", boat.PierId);
             return View(boat);
         }
 
@@ -86,6 +104,8 @@ namespace FIT5032_FUNSAILMEL.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.BoatOwnerId = new SelectList(db.AspNetUsers, "Id", "Email", boat.BoatOwnerId);
+            ViewBag.PierId = new SelectList(db.Piers, "Id", "PierName", boat.PierId);
             return View(boat);
         }
 

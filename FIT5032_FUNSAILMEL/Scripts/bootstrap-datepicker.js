@@ -1707,7 +1707,7 @@
 		datesDisabled: [],
 		endDate: Infinity,
 		forceParse: true,
-		format: 'mm/dd/yyyy',
+		format: 'dd/mm/yyyy',
 		isInline: null,
 		keepEmptyValues: false,
 		keyboardNavigation: true,

@@ -65,6 +65,10 @@ namespace FIT5032_FUNSAILMEL.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Account type")]
+        public string AccRole { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }

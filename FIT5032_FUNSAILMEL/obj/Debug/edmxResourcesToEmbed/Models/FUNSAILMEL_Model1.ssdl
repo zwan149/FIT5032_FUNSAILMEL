@@ -1,50 +1,66 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="FUNSAILMEL_Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="FUNSAILMEL_Model1StoreContainer">
-    <EntitySet Name="Customers" EntityType="FUNSAILMEL_Model1.Store.Customers" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="BoatOwners" EntityType="FUNSAILMEL_Model1.Store.BoatOwners" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Boats" EntityType="FUNSAILMEL_Model1.Store.Boats" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Bookings" EntityType="FUNSAILMEL_Model1.Store.Bookings" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Piers" EntityType="FUNSAILMEL_Model1.Store.Piers" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Admins" EntityType="FUNSAILMEL_Model1.Store.Admins" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="CustomerBooking" Association="FUNSAILMEL_Model1.Store.CustomerBooking">
-      <End Role="Customer" EntitySet="Customers" />
-      <End Role="Booking" EntitySet="Bookings" />
-    </AssociationSet>
-    <AssociationSet Name="BoatBoatOwner" Association="FUNSAILMEL_Model1.Store.BoatBoatOwner">
-      <End Role="Boat" EntitySet="Boats" />
-      <End Role="BoatOwner" EntitySet="BoatOwners" />
-    </AssociationSet>
-    <AssociationSet Name="BoatBooking" Association="FUNSAILMEL_Model1.Store.BoatBooking">
-      <End Role="Boat" EntitySet="Boats" />
-      <End Role="Booking" EntitySet="Bookings" />
-    </AssociationSet>
-    <AssociationSet Name="BoatPier" Association="FUNSAILMEL_Model1.Store.BoatPier">
-      <End Role="Boat" EntitySet="Boats" />
-      <End Role="Pier" EntitySet="Piers" />
-    </AssociationSet>
-  </EntityContainer>
-  <EntityType Name="Customers">
+<Schema Namespace="FUNSAILMEL_Model1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
   </EntityType>
-  <EntityType Name="BoatOwners">
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="ContactPerson" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="ContactPhone" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="PreferName" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Boats">
     <Key>
@@ -53,10 +69,10 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="BoatName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="BoatType" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Year" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
     <Property Name="Colour" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Capacity" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="BoatOwnerId" Type="int" Nullable="false" />
+    <Property Name="Capacity" Type="int" Nullable="false" />
+    <Property Name="BoatOwnerId" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="PierId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Bookings">
@@ -64,8 +80,8 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Date" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="CustomerId" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="CustomerId" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="BoatId" Type="int" Nullable="false" />
     <Property Name="Review" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
@@ -76,59 +92,151 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PierName" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
-  <EntityType Name="Admins">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <Association Name="CustomerBooking">
-    <End Role="Customer" Type="FUNSAILMEL_Model1.Store.Customers" Multiplicity="1" />
-    <End Role="Booking" Type="FUNSAILMEL_Model1.Store.Bookings" Multiplicity="*" />
+  <Association Name="FK_BoatBoatOwner">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Boats" Type="Self.Boats" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Customer">
+      <Principal Role="AspNetUsers">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Booking">
-        <PropertyRef Name="CustomerId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="BoatBoatOwner">
-    <End Role="Boat" Type="FUNSAILMEL_Model1.Store.Boats" Multiplicity="*" />
-    <End Role="BoatOwner" Type="FUNSAILMEL_Model1.Store.BoatOwners" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="BoatOwner">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Boat">
+      <Dependent Role="Boats">
         <PropertyRef Name="BoatOwnerId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="BoatBooking">
-    <End Role="Boat" Type="FUNSAILMEL_Model1.Store.Boats" Multiplicity="1" />
-    <End Role="Booking" Type="FUNSAILMEL_Model1.Store.Bookings" Multiplicity="*" />
+  <Association Name="FK_BoatBooking">
+    <End Role="Boats" Type="Self.Boats" Multiplicity="1" />
+    <End Role="Bookings" Type="Self.Bookings" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Boat">
+      <Principal Role="Boats">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Booking">
+      <Dependent Role="Bookings">
         <PropertyRef Name="BoatId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="BoatPier">
-    <End Role="Boat" Type="FUNSAILMEL_Model1.Store.Boats" Multiplicity="*" />
-    <End Role="Pier" Type="FUNSAILMEL_Model1.Store.Piers" Multiplicity="1" />
+  <Association Name="FK_BoatPier">
+    <End Role="Piers" Type="Self.Piers" Multiplicity="1" />
+    <End Role="Boats" Type="Self.Boats" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Pier">
+      <Principal Role="Piers">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Boat">
+      <Dependent Role="Boats">
         <PropertyRef Name="PierId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_CustomerBooking">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Bookings" Type="Self.Bookings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bookings">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FUNSAILMEL_Model1StoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Boats" EntityType="Self.Boats" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bookings" EntityType="Self.Bookings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Piers" EntityType="Self.Piers" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_BoatBoatOwner" Association="Self.FK_BoatBoatOwner">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Boats" EntitySet="Boats" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BoatBooking" Association="Self.FK_BoatBooking">
+      <End Role="Boats" EntitySet="Boats" />
+      <End Role="Bookings" EntitySet="Bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BoatPier" Association="Self.FK_BoatPier">
+      <End Role="Piers" EntitySet="Piers" />
+      <End Role="Boats" EntitySet="Boats" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CustomerBooking" Association="Self.FK_CustomerBooking">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Bookings" EntitySet="Bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+  </EntityContainer>
 </Schema>

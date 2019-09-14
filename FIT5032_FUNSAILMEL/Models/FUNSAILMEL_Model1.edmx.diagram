@@ -5,16 +5,21 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="0a74452be95e4243a44c0878a0a92733" Name="Diagram1" >
-        <EntityTypeShape EntityType="FUNSAILMEL_Model1.Customer" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="FUNSAILMEL_Model1.BoatOwner" Width="1.5" PointX="10" PointY="0.75" />
-        <EntityTypeShape EntityType="FUNSAILMEL_Model1.Boat" Width="1.5" PointX="7" PointY="0.75" />
-        <EntityTypeShape EntityType="FUNSAILMEL_Model1.Booking" Width="1.5" PointX="3.875" PointY="0.75" />
-        <AssociationConnector Association="FUNSAILMEL_Model1.CustomerBooking" />
-        <AssociationConnector Association="FUNSAILMEL_Model1.BoatBoatOwner" />
-        <AssociationConnector Association="FUNSAILMEL_Model1.BoatBooking" />
-        <EntityTypeShape EntityType="FUNSAILMEL_Model1.Pier" Width="1.5" PointX="7" PointY="4.5" />
-        <AssociationConnector Association="FUNSAILMEL_Model1.BoatPier" />
-        <EntityTypeShape EntityType="FUNSAILMEL_Model1.Admin" Width="1.5" PointX="12.875" PointY="0.75" />
+        <EntityTypeShape EntityType="FUNSAILMEL_Model1.C__MigrationHistory" Width="1.5" PointX="8" PointY="0.5" />
+        <EntityTypeShape EntityType="FUNSAILMEL_Model1.AspNetRole" Width="1.5" PointX="1" PointY="0.5" />
+        <EntityTypeShape EntityType="FUNSAILMEL_Model1.AspNetUserClaim" Width="1.5" PointX="1" PointY="2.375" />
+        <EntityTypeShape EntityType="FUNSAILMEL_Model1.AspNetUserLogin" Width="1.5" PointX="1" PointY="4.75" />
+        <EntityTypeShape EntityType="FUNSAILMEL_Model1.AspNetUser" Width="1.5" PointX="3.25" PointY="0.5" />
+        <EntityTypeShape EntityType="FUNSAILMEL_Model1.Boat" Width="1.5" PointX="5.75" PointY="3.875" />
+        <EntityTypeShape EntityType="FUNSAILMEL_Model1.Booking" Width="1.5" PointX="5.75" PointY="0.5" />
+        <EntityTypeShape EntityType="FUNSAILMEL_Model1.Pier" Width="1.5" PointX="8" PointY="3.875" />
+        <AssociationConnector Association="FUNSAILMEL_Model1.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="FUNSAILMEL_Model1.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="FUNSAILMEL_Model1.FK_BoatBoatOwner" />
+        <AssociationConnector Association="FUNSAILMEL_Model1.FK_CustomerBooking" />
+        <AssociationConnector Association="FUNSAILMEL_Model1.FK_BoatBooking" />
+        <AssociationConnector Association="FUNSAILMEL_Model1.FK_BoatPier" />
+        <AssociationConnector Association="FUNSAILMEL_Model1.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

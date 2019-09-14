@@ -25,11 +25,13 @@ namespace FIT5032_FUNSAILMEL.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<BoatOwner> BoatOwners { get; set; }
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Boat> Boats { get; set; }
         public virtual DbSet<Booking> Bookings { get; set; }
         public virtual DbSet<Pier> Piers { get; set; }
-        public virtual DbSet<Admin> Admins { get; set; }
     }
 }

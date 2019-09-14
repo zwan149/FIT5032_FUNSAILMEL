@@ -15,6 +15,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
         private FUNSAILMEL_Model1Container db = new FUNSAILMEL_Model1Container();
 
         // GET: Piers
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.Piers.ToList());
@@ -46,6 +47,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "Id,PierName")] Pier pier)
         {
             if (ModelState.IsValid)

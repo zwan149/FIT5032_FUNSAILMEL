@@ -28,10 +28,7 @@
             @Html.DisplayNameFor(model => model.Capacity)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BoatOwnerId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PierId)
+            @Html.DisplayNameFor(model => model.Pier.PierName)
         </th>
         <th></th>
     </tr>
@@ -54,10 +51,7 @@
             @Html.DisplayFor(modelItem => item.Capacity)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.BoatOwnerId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PierId)
+            @Html.DisplayFor(modelItem => item.Pier.PierName)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

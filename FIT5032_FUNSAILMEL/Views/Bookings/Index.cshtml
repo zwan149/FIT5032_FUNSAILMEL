@@ -16,10 +16,7 @@
             @Html.DisplayNameFor(model => model.Date)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CustomerId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BoatId)
+            @Html.DisplayNameFor(model => model.Boat.BoatName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Review)
@@ -33,10 +30,7 @@
             @Html.DisplayFor(modelItem => item.Date)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CustomerId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BoatId)
+            @Html.DisplayFor(modelItem => item.Boat.BoatName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Review)
