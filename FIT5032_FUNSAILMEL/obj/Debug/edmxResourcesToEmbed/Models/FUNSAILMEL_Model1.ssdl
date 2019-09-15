@@ -83,7 +83,7 @@
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="CustomerId" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="BoatId" Type="int" Nullable="false" />
-    <Property Name="Review" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Review" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Piers">
     <Key>

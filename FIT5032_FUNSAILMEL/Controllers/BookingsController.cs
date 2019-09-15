@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -57,21 +59,38 @@ namespace FIT5032_FUNSAILMEL.Controllers
         [Authorize]
         public ActionResult Create([Bind(Include = "Id,Date,BoatId,Review")] Booking booking)
         {
-            booking.CustomerId = User.Identity.GetUserId();
-
-            ModelState.Clear();
-            TryValidateModel(booking);
-
-            if (ModelState.IsValid)
+            try
             {
-                db.Bookings.Add(booking);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+                booking.CustomerId = User.Identity.GetUserId();
+
+                ModelState.Clear();
+                TryValidateModel(booking);
+
+                if (ModelState.IsValid)
+                {
+                    db.Bookings.Add(booking);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+                ViewBag.CustomerId = new SelectList(db.AspNetUsers, "Id", "Email", booking.CustomerId);
+                ViewBag.BoatId = new SelectList(db.Boats, "Id", "BoatName", booking.BoatId);
+                return View(booking);
+
             }
 
-            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "Id", "Email", booking.CustomerId);
-            ViewBag.BoatId = new SelectList(db.Boats, "Id", "BoatName", booking.BoatId);
-            return View(booking);
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Trace.TraceInformation("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
+                    }
+                }
+                return View(booking);
+            }
         }
 
         // GET: Bookings/Edit/5

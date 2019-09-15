@@ -88,7 +88,7 @@
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="CustomerId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="BoatId" Type="int" Nullable="false" />
-          <Property Name="Review" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Review" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Piers">
           <Key>
@@ -372,7 +372,7 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CustomerId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="BoatId" Type="Int32" Nullable="false" />
-          <Property Name="Review" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Review" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="FUNSAILMEL_Model1.FK_CustomerBooking" FromRole="Booking" ToRole="AspNetUser" />
           <NavigationProperty Name="Boat" Relationship="FUNSAILMEL_Model1.FK_BoatBooking" FromRole="Booking" ToRole="Boat" />
         </EntityType>

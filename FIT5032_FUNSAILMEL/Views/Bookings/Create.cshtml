@@ -57,13 +57,14 @@
     <link href="~/Content/bootstrap-datepicker3.css" rel="stylesheet" />
     <script src="~/Scripts/bootstrap-datepicker.js"></script>
     <script type='text/javascript'>
-    $(function () {
-        $('.input-group.date').datepicker({
-            calendarWeeks: true,
-            todayHighlight: true,
-            autoclose: true
+        $(function () {
+            $('.input-group.date').datepicker({
+                calendarWeeks: true,
+                todayHighlight: true,
+                autoclose: true,
+                format: 'dd/mm/yyyy'
+            });
         });
-    });
 
     </script>
 }

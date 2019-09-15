@@ -27,7 +27,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Date)
+            @DateTime.Parse(Html.DisplayFor(modelItem => item.Date).ToString()).ToShortDateString()
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Boat.BoatName)
