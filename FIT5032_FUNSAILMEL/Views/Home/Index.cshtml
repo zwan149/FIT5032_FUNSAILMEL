@@ -2,11 +2,18 @@
     ViewBag.Title = "Home";
 }
 
-<div class="jumbotron">
-    <h1>FunSailMel</h1>
-    <p class="lead">FunSailMel is an online booking website for hiring boat to sail in Melbourne.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+    <div class="jumbotron">
+        <h1>FunSailMel</h1>
+        <p class="lead">FunSailMel is an online booking website for hiring boat to sail in Melbourne.</p>
+        <img srcset="~/images/topimage_320px.jpg 320w,
+                     ~/images/topimage_640px.jpg 640w,
+                     ~/images/topimage_1000px.jpg 1000w"
+             sizes="(max-width: 639px) 260px,
+                    (max-width: 1199px) 580px,
+                    1000px"
+             src="~/images/topimage_1000px.jpg" />
+        <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    </div>
 
 <div class="row">
     <div class="col-md-4">

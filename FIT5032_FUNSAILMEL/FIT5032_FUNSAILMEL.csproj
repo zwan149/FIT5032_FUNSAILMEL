@@ -250,6 +250,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\topimage_1000px.jpg" />
+    <Content Include="images\topimage_320px.jpg" />
+    <Content Include="images\topimage_640px.jpg" />
     <Content Include="Models\FUNSAILMEL_Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>FUNSAILMEL_Model1.Context.cs</LastGenOutput>
