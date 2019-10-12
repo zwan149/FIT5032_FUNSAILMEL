@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="FUNSAILMEL_Model1.AspNetRole" Width="1.5" PointX="1" PointY="0.5" />
         <EntityTypeShape EntityType="FUNSAILMEL_Model1.AspNetUserClaim" Width="1.5" PointX="1" PointY="2.375" />
         <EntityTypeShape EntityType="FUNSAILMEL_Model1.AspNetUserLogin" Width="1.5" PointX="1" PointY="4.75" />
-        <EntityTypeShape EntityType="FUNSAILMEL_Model1.AspNetUser" Width="1.5" PointX="3.25" PointY="0.5" />
+        <EntityTypeShape EntityType="FUNSAILMEL_Model1.AspNetUser" Width="1.5" PointX="3.375" PointY="0.5" />
         <EntityTypeShape EntityType="FUNSAILMEL_Model1.Boat" Width="1.5" PointX="5.75" PointY="3.875" />
         <EntityTypeShape EntityType="FUNSAILMEL_Model1.Booking" Width="1.5" PointX="5.75" PointY="0.5" />
         <EntityTypeShape EntityType="FUNSAILMEL_Model1.Pier" Width="1.5" PointX="8" PointY="3.875" />

@@ -47,8 +47,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
-        public ActionResult Create([Bind(Include = "Id,PierName")] Pier pier)
+        public ActionResult Create([Bind(Include = "Id,PierName,Latitude,Longitude")] Pier pier)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +79,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,PierName")] Pier pier)
+        public ActionResult Edit([Bind(Include = "Id,PierName,Latitude,Longitude")] Pier pier)
         {
             if (ModelState.IsValid)
             {

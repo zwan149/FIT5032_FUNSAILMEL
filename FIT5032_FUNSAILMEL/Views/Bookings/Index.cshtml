@@ -16,10 +16,16 @@
             @Html.DisplayNameFor(model => model.Date)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Boat.BoatName)
+            @Html.DisplayNameFor(model => model.Review)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Review)
+            @Html.DisplayNameFor(model => model.Complete)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Boat.BoatName)
         </th>
         <th></th>
     </tr>
@@ -27,18 +33,25 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @DateTime.Parse(Html.DisplayFor(modelItem => item.Date).ToString()).ToShortDateString()
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Boat.BoatName)
+            @Html.DisplayFor(modelItem => item.Date)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Review)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.DisplayFor(modelItem => item.Complete)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Boat.BoatName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+            @Html.ActionLink("Download As Pdf", "DownloadAsPdf", new { id = item.Id })
         </td>
     </tr>
 }

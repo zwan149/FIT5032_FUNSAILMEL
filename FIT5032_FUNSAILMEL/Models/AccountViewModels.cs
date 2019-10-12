@@ -6,6 +6,10 @@ namespace FIT5032_FUNSAILMEL.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
+        [Display(Name = "Account type")]
+        public string AccRole { get; set; }
+
+        [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }

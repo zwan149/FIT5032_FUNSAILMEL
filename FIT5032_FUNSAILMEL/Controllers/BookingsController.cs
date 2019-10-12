@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rotativa;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -57,7 +58,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Create([Bind(Include = "Id,Date,BoatId,Review")] Booking booking)
+        public ActionResult Create([Bind(Include = "Id,Date,BoatId,Review,Complete")] Booking booking)
         {
             try
             {
@@ -77,9 +78,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
                 ViewBag.CustomerId = new SelectList(db.AspNetUsers, "Id", "Email", booking.CustomerId);
                 ViewBag.BoatId = new SelectList(db.Boats, "Id", "BoatName", booking.BoatId);
                 return View(booking);
-
             }
-
             catch (DbEntityValidationException dbEx)
             {
                 foreach (var validationErrors in dbEx.EntityValidationErrors)
@@ -115,7 +114,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Date,CustomerId,BoatId,Review")] Booking booking)
+        public ActionResult Edit([Bind(Include = "Id,Date,CustomerId,BoatId,Review,Complete")] Booking booking)
         {
             if (ModelState.IsValid)
             {
@@ -161,6 +160,19 @@ namespace FIT5032_FUNSAILMEL.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        //Bookings/DownloadAsPdf
+        public ActionResult DownloadAsPdf(int id)
+        {
+            using (FUNSAILMEL_Model1Container db = new FUNSAILMEL_Model1Container())
+            {
+                Booking booking = db.Bookings.FirstOrDefault(c => c.Id == id);
+
+                var report = new PartialViewAsPdf("~/Views/Shared/DetailBooking.cshtml", booking);
+                return report;
+            }
+
         }
     }
 }

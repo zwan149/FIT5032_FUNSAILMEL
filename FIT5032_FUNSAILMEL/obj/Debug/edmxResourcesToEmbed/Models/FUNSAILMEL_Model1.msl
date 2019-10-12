@@ -74,6 +74,7 @@
     <EntitySetMapping Name="Bookings">
       <EntityTypeMapping TypeName="FUNSAILMEL_Model1.Booking">
         <MappingFragment StoreEntitySet="Bookings">
+          <ScalarProperty Name="Complete" ColumnName="Complete" />
           <ScalarProperty Name="Review" ColumnName="Review" />
           <ScalarProperty Name="BoatId" ColumnName="BoatId" />
           <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
@@ -85,6 +86,8 @@
     <EntitySetMapping Name="Piers">
       <EntityTypeMapping TypeName="FUNSAILMEL_Model1.Pier">
         <MappingFragment StoreEntitySet="Piers">
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
           <ScalarProperty Name="PierName" ColumnName="PierName" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>

@@ -58,11 +58,11 @@ namespace FIT5032_FUNSAILMEL
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "195365369457-gj633j470b3e6vsesnj352ec4ah6bvg4.apps.googleusercontent.com",
+                ClientSecret = "RwBphL8bS4uvcTJ8tgTfa8DQ"
+            });
         }
     }
 }

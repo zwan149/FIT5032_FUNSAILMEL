@@ -127,6 +127,7 @@
     <Property Name="Review" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="AspNetUser" Relationship="FUNSAILMEL_Model1.FK_CustomerBooking" FromRole="Booking" ToRole="AspNetUser" />
     <NavigationProperty Name="Boat" Relationship="FUNSAILMEL_Model1.FK_BoatBooking" FromRole="Booking" ToRole="Boat" />
+    <Property Name="Complete" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="Pier">
     <Key>
@@ -135,6 +136,8 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="PierName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Boats" Relationship="FUNSAILMEL_Model1.FK_BoatPier" FromRole="Pier" ToRole="Boat" />
+    <Property Name="Latitude" Type="Decimal" Nullable="false" Precision="10" Scale="8" />
+    <Property Name="Longitude" Type="Decimal" Nullable="false" Precision="11" Scale="8" />
   </EntityType>
   <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
     <End Type="FUNSAILMEL_Model1.AspNetUser" Role="AspNetUser" Multiplicity="1">

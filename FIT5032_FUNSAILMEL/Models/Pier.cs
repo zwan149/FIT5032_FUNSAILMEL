@@ -22,6 +22,8 @@ namespace FIT5032_FUNSAILMEL.Models
     
         public int Id { get; set; }
         public string PierName { get; set; }
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Boat> Boats { get; set; }
