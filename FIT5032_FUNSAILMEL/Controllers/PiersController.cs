@@ -15,13 +15,19 @@ namespace FIT5032_FUNSAILMEL.Controllers
         private FUNSAILMEL_Model1Container db = new FUNSAILMEL_Model1Container();
 
         // GET: Piers
-        [Authorize]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Index()
         {
             return View(db.Piers.ToList());
         }
 
+        public ActionResult IndexV2()
+        {
+            return View(db.Piers.ToList());
+        }
+
         // GET: Piers/Details/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +43,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
         }
 
         // GET: Piers/Create
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             return View();
@@ -47,6 +54,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create([Bind(Include = "Id,PierName,Latitude,Longitude")] Pier pier)
         {
             if (ModelState.IsValid)
@@ -60,6 +68,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
         }
 
         // GET: Piers/Edit/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -79,6 +88,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit([Bind(Include = "Id,PierName,Latitude,Longitude")] Pier pier)
         {
             if (ModelState.IsValid)
@@ -91,6 +101,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
         }
 
         // GET: Piers/Delete/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -108,6 +119,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
         // POST: Piers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult DeleteConfirmed(int id)
         {
             Pier pier = db.Piers.Find(id);
@@ -123,6 +135,12 @@ namespace FIT5032_FUNSAILMEL.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        
+        public JsonResult GetMapMarker()
+        {
+            var ListOfAddress = db.Piers.ToList();
+            return Json(ListOfAddress, JsonRequestBehavior.AllowGet);
         }
     }
 }

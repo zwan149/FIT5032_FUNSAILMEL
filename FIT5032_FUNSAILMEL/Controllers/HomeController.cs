@@ -11,6 +11,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
     [RequireHttps]
     public class HomeController : Controller
     {
+        private FUNSAILMEL_Model1Container db = new FUNSAILMEL_Model1Container();
         public ActionResult Index()
         {
             return View();
@@ -18,25 +19,30 @@ namespace FIT5032_FUNSAILMEL.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "What is FunSailMel";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Contact us if you have any question";
 
             return View();
         }
 
-        [Authorize]
+        public ActionResult Check_Map()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Administrator")]
         public ActionResult Send_Email()
         {
             return View(new SendEmailViewModel());
         }
 
-        [Authorize]
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Send_Email(SendEmailViewModel model, HttpPostedFileBase postedFile)
@@ -70,6 +76,19 @@ namespace FIT5032_FUNSAILMEL.Controllers
             }
 
             return View();
+        }
+
+        [Authorize(Roles = "Administrator")]
+        public ActionResult Statistics()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Administrator")]
+        public ActionResult GetChart()
+        {
+            return Json(db.Boats.Select(p => new { p.Colour, p.Capacity }),
+                    JsonRequestBehavior.AllowGet);
         }
     }
 }

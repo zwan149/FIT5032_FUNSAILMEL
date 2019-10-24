@@ -115,6 +115,7 @@
     <NavigationProperty Name="AspNetUser" Relationship="FUNSAILMEL_Model1.FK_BoatBoatOwner" FromRole="Boat" ToRole="AspNetUser" />
     <NavigationProperty Name="Bookings" Relationship="FUNSAILMEL_Model1.FK_BoatBooking" FromRole="Boat" ToRole="Booking" />
     <NavigationProperty Name="Pier" Relationship="FUNSAILMEL_Model1.FK_BoatPier" FromRole="Boat" ToRole="Pier" />
+    <Property Name="Picture" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Booking">
     <Key>
@@ -124,10 +125,10 @@
     <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="CustomerId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="BoatId" Type="Int32" Nullable="false" />
-    <Property Name="Review" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="AspNetUser" Relationship="FUNSAILMEL_Model1.FK_CustomerBooking" FromRole="Booking" ToRole="AspNetUser" />
     <NavigationProperty Name="Boat" Relationship="FUNSAILMEL_Model1.FK_BoatBooking" FromRole="Booking" ToRole="Boat" />
     <Property Name="Complete" Type="Boolean" Nullable="false" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Pier">
     <Key>
@@ -136,8 +137,8 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="PierName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Boats" Relationship="FUNSAILMEL_Model1.FK_BoatPier" FromRole="Pier" ToRole="Boat" />
-    <Property Name="Latitude" Type="Decimal" Nullable="false" Precision="10" Scale="8" />
-    <Property Name="Longitude" Type="Decimal" Nullable="false" Precision="11" Scale="8" />
+    <Property Name="Latitude" Type="Double" Nullable="false" />
+    <Property Name="Longitude" Type="Double" Nullable="false" />
   </EntityType>
   <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
     <End Type="FUNSAILMEL_Model1.AspNetUser" Role="AspNetUser" Multiplicity="1">

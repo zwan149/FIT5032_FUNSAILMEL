@@ -1,0 +1,124 @@
+﻿@model IEnumerable<FIT5032_FUNSAILMEL.Models.Pier>
+
+@{
+    ViewBag.Title = "IndexV2";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>IndexV2</h2>
+<div id="MapDiv" style="width: 500px; height: 500px">
+</div>
+<br />
+<p>
+    @Html.ActionLink("Create New", "Create", "Piers", new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PierName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="coordinates">
+            <td>
+                @Html.DisplayFor(modelItem => item.PierName)
+            </td>
+            <td class="latitude">
+                @Html.DisplayFor(modelItem => item.Latitude)
+            </td>
+            <td class="longitude">
+                @Html.DisplayFor(modelItem => item.Longitude)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/mapbox")
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgemwAcowsbY-5XsRlzUGn5skgGTMITvI"></script>
+    <script type="text/javascript">
+
+        $.ajax({
+            url: '/Piers/GetMapMarker',
+            type: 'GET',
+            success: function (data) {
+                //create a blank array
+                var markers = [];
+
+                //loop the list of addresses returned from Ajax request
+                $.each(data, function (index, item) {
+                    //create a blank array of address
+                    var marker = {};
+
+                    //fill data
+                    marker["title"] = item.Id;
+                    marker["lat"] = item.Latitude;
+                    marker["lng"] = item.Longitude;
+                    marker["description"] = item.PierName;
+
+                    //push the current marker details in markers array
+                    markers.push(marker);
+                })
+
+                //call Map function with all markers passed as list of arrays
+                initializeMap(markers);
+
+            }
+        });
+
+
+        function initializeMap(markers) {
+            //you can check your marker data in console
+            console.log(markers);
+            //Create Google map options
+            var GoogleMapOptions = {
+                center: new google.maps.LatLng(markers[0].lat, markers[0].lng),
+                zoom: 6,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+
+            //create a variable of InfoWindow type to show data on clicking map icon
+            var infoWindow = new google.maps.InfoWindow();
+            var map = new google.maps.Map(document.getElementById("MapDiv"), GoogleMapOptions);
+
+
+            //loop through each marker data
+            for (i = 0; i < markers.length; i++) {
+                var data = markers[i]
+                //set lat long of current marker
+                var myLatlng = new google.maps.LatLng(data.Latitude, data.Longitude);
+
+                var marker = new google.maps.Marker({
+                    position: myLatlng,
+                    map: map,
+                    title: data.Id
+                });
+
+                (function (marker, data) {
+                    // add a on marker click event
+                    google.maps.event.addListener(marker, "click", function (e) {
+                        //show description
+                        infoWindow.setContent(data.PierName);
+                        infoWindow.open(map, marker);
+                    });
+                })(marker, data);
+            }
+        }
+    </script>
+}

@@ -324,6 +324,7 @@
     <Content Include="Scripts\custom.jquery.validate.js" />
     <Content Include="App_Browsers\qt.browser" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\googlemap.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -386,6 +387,10 @@
     <Content Include="Views\Bookings\Index.cshtml" />
     <Content Include="Views\Home\Send_Email.cshtml" />
     <Content Include="Views\Shared\DetailBooking.cshtml" />
+    <Content Include="Views\Home\Check_Map.cshtml" />
+    <Content Include="Views\Piers\IndexV2.cshtml" />
+    <Content Include="Views\Bookings\ViewBoats.cshtml" />
+    <Content Include="Views\Home\Statistics.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -402,6 +407,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="images\boats\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

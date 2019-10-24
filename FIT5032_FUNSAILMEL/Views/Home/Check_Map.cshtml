@@ -1,0 +1,36 @@
+﻿
+
+@{
+    ViewBag.Title = "Check_Map";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Check Map</h2>
+
+<style>
+    /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+    #map {
+        height: 600px;
+        width: 900px;
+    }
+</style>
+
+<div class="row mb-2">
+    <div class="col">
+        <input class="form-control" id="search" type="text" placeholder="Search..." />  
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div id="map"></div>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to Home", "Index")
+</div>
+
+<script src="~/Scripts/googlemap.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?callback=createMap&libraries=places&key=AIzaSyDgemwAcowsbY-5XsRlzUGn5skgGTMITvI"
+        async defer></script>

@@ -19,7 +19,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
         private FUNSAILMEL_Model1Container db = new FUNSAILMEL_Model1Container();
 
         // GET: Bookings
-        [Authorize]
+        [Authorize(Roles = "Customer")]
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
@@ -30,6 +30,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
         }
 
         // GET: Bookings/Details/5
+        [Authorize(Roles = "Customer")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -44,11 +45,30 @@ namespace FIT5032_FUNSAILMEL.Controllers
             return View(booking);
         }
 
-        // GET: Bookings/Create
-        public ActionResult Create()
+        // GET: Bookings/ViewBoats
+        [Authorize(Roles = "Customer")]
+        public ActionResult ViewBoats()
         {
+            var boats = db.Boats.ToList();
+
+            return View(boats);
+        }
+
+        // GET: Bookings/Create
+        [Authorize(Roles = "Customer")]
+        public ActionResult Create(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Boat boat = db.Boats.Find(id);
+            if (boat == null)
+            {
+                return HttpNotFound();
+            }
             ViewBag.CustomerId = new SelectList(db.AspNetUsers, "Id", "Email");
-            ViewBag.BoatId = new SelectList(db.Boats, "Id", "BoatName");
+            ViewBag.BoatId = new SelectList(db.Boats, "Id", "BoatName", id);
             return View();
         }
 
@@ -57,7 +77,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "Customer")]
         public ActionResult Create([Bind(Include = "Id,Date,BoatId,Review,Complete")] Booking booking)
         {
             try
@@ -93,6 +113,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
         }
 
         // GET: Bookings/Edit/5
+        [Authorize(Roles = "Customer")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -114,8 +135,11 @@ namespace FIT5032_FUNSAILMEL.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Date,CustomerId,BoatId,Review,Complete")] Booking booking)
+        [Authorize(Roles = "Customer")]
+        public ActionResult Edit([Bind(Include = "Id,Date,BoatId,Review,Complete")] Booking booking)
         {
+            booking.CustomerId = User.Identity.GetUserId();
+
             if (ModelState.IsValid)
             {
                 db.Entry(booking).State = EntityState.Modified;
@@ -128,6 +152,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
         }
 
         // GET: Bookings/Delete/5
+        [Authorize(Roles = "Customer")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -145,6 +170,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
         // POST: Bookings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Customer")]
         public ActionResult DeleteConfirmed(int id)
         {
             Booking booking = db.Bookings.Find(id);
@@ -163,6 +189,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
         }
 
         //Bookings/DownloadAsPdf
+        [Authorize(Roles = "Customer")]
         public ActionResult DownloadAsPdf(int id)
         {
             using (FUNSAILMEL_Model1Container db = new FUNSAILMEL_Model1Container())

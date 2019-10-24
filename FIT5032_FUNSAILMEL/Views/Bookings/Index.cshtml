@@ -8,7 +8,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "ViewBoats")
 </p>
 <table class="table">
     <tr>
@@ -16,16 +16,13 @@
             @Html.DisplayNameFor(model => model.Date)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Review)
+            @Html.DisplayNameFor(model => model.Boat.BoatName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comment)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Complete)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Boat.BoatName)
         </th>
         <th></th>
     </tr>
@@ -36,16 +33,13 @@
             @Html.DisplayFor(modelItem => item.Date)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Review)
+            @Html.DisplayFor(modelItem => item.Boat.BoatName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Complete)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AspNetUser.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Boat.BoatName)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

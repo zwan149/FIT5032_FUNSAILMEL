@@ -60,6 +60,7 @@
     <EntitySetMapping Name="Boats">
       <EntityTypeMapping TypeName="FUNSAILMEL_Model1.Boat">
         <MappingFragment StoreEntitySet="Boats">
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
           <ScalarProperty Name="PierId" ColumnName="PierId" />
           <ScalarProperty Name="BoatOwnerId" ColumnName="BoatOwnerId" />
           <ScalarProperty Name="Capacity" ColumnName="Capacity" />
@@ -74,8 +75,8 @@
     <EntitySetMapping Name="Bookings">
       <EntityTypeMapping TypeName="FUNSAILMEL_Model1.Booking">
         <MappingFragment StoreEntitySet="Bookings">
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
           <ScalarProperty Name="Complete" ColumnName="Complete" />
-          <ScalarProperty Name="Review" ColumnName="Review" />
           <ScalarProperty Name="BoatId" ColumnName="BoatId" />
           <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
           <ScalarProperty Name="Date" ColumnName="Date" />

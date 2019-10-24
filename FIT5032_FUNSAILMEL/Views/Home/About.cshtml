@@ -1,29 +1,33 @@
 ﻿@{
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<body class="about">
+    <h2>@ViewBag.Title</h2>
+    <h3>@ViewBag.Message</h3>
 
-<div class="container">
-    <h1>Bootstrap datepicker</h1>
-    <div class="input-group date">
-        <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-    </div>
-</div>
-@section scripts{
-    <link href="~/Content/bootstrap-datepicker3.css" rel="stylesheet" />
-    <script src="~/Scripts/bootstrap-datepicker.js"></script>
-    <script type='text/javascript'>
-    $(function () {
-        $('.input-group.date').datepicker({
-            calendarWeeks: true,
-            todayHighlight: true,
-            autoclose: true
-        });
-    });
+    <p1>
+        FunSailMel is a website application for booking boats to sail in Melbourne.
+        The goal of the application is to make sailing booking easier for Tourism.
+        The location of Melbourne has well accesses to seas and oceans, thus as a tourist-welcome city, there is a high demand of sailing around for tourism.
+        With a booking website, tourists can view and book sailing plans online.
+        It is also good for publicity to learn and know about sailing resources in Melbourne.
+        The system allows customers to register account on the website, and then management their boat booking online.
+        It also allows customers to make further requests via quotation.
+        Customers can leave reviews for their sailing trip.
+        For boat owners, they can register and create their boat details on the website as well. Boat owners can also manage bookings and see reviews for their boats.
+        The administrator for the website can login to manage users and piers in the database system.
+    </p1>
+</body>
 
-    </script>
-
-}
+<style>
+    h3 {
+        color: blue;
+    }
+    p1 {
+        color: darkblue;
+        font-size: large;
+        text-align: justify;
+        background: lightblue;
+    }
+</style>

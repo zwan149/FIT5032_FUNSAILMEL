@@ -12,6 +12,14 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.Picture)
+        </dt>
+
+        <dd>
+            <img class="img-thumbnail" src="@Url.Content("~/images/boats/" + Model.Picture)" />
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.BoatName)
         </dt>
 

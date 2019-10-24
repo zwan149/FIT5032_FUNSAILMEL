@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -16,7 +17,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
         private FUNSAILMEL_Model1Container db = new FUNSAILMEL_Model1Container();
 
         // GET: Boats
-        [Authorize]
+        [Authorize(Roles = "BoatOwner")]
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
@@ -27,6 +28,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
         }
 
         // GET: Boats/Details/5
+        [Authorize(Roles = "BoatOwner")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -42,6 +44,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
         }
 
         // GET: Boats/Create
+        [Authorize(Roles = "BoatOwner")]
         public ActionResult Create()
         {
             ViewBag.BoatOwnerId = new SelectList(db.AspNetUsers, "Id", "Email");
@@ -54,16 +57,24 @@ namespace FIT5032_FUNSAILMEL.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
-        public ActionResult Create([Bind(Include = "Id,BoatName,BoatType,Year,Colour,Capacity,PierId")] Boat boat)
+        [Authorize(Roles = "BoatOwner")]
+        public ActionResult Create([Bind(Include = "Id,BoatName,BoatType,Year,Colour,Capacity,PierId")] Boat boat, HttpPostedFileBase postedFile)
         {
             boat.BoatOwnerId = User.Identity.GetUserId();
 
             ModelState.Clear();
+            var myUniqueFileName = string.Format(@"{0}", Guid.NewGuid());
+            boat.Picture = myUniqueFileName;
             TryValidateModel(boat);
 
             if (ModelState.IsValid)
             {
+                string serverPath = Server.MapPath("~/images/boats/");
+                string fileExtension = Path.GetExtension(postedFile.FileName);
+                string filePath = boat.Picture + fileExtension;
+                boat.Picture = filePath;
+                postedFile.SaveAs(serverPath + boat.Picture);
+
                 db.Boats.Add(boat);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -75,6 +86,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
         }
 
         // GET: Boats/Edit/5
+        [Authorize(Roles = "BoatOwner")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -96,10 +108,24 @@ namespace FIT5032_FUNSAILMEL.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,BoatName,BoatType,Year,Colour,Capacity,BoatOwnerId,PierId")] Boat boat)
+        [Authorize(Roles = "BoatOwner")]
+        public ActionResult Edit([Bind(Include = "Id,BoatName,BoatType,Year,Colour,Capacity,PierId")] Boat boat, HttpPostedFileBase postedFile)
         {
+            boat.BoatOwnerId = User.Identity.GetUserId();
+
+            ModelState.Clear();
+            var myUniqueFileName = string.Format(@"{0}", Guid.NewGuid());
+            boat.Picture = myUniqueFileName;
+            TryValidateModel(boat);
+
             if (ModelState.IsValid)
             {
+                string serverPath = Server.MapPath("~/images/boats/");
+                string fileExtension = Path.GetExtension(postedFile.FileName);
+                string filePath = boat.Picture + fileExtension;
+                boat.Picture = filePath;
+                postedFile.SaveAs(serverPath + boat.Picture);
+
                 db.Entry(boat).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -110,6 +136,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
         }
 
         // GET: Boats/Delete/5
+        [Authorize(Roles = "BoatOwner")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -127,6 +154,7 @@ namespace FIT5032_FUNSAILMEL.Controllers
         // POST: Boats/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "BoatOwner")]
         public ActionResult DeleteConfirmed(int id)
         {
             Boat boat = db.Boats.Find(id);

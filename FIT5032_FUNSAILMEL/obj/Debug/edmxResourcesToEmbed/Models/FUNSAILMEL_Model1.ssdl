@@ -74,6 +74,7 @@
     <Property Name="Capacity" Type="int" Nullable="false" />
     <Property Name="BoatOwnerId" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="PierId" Type="int" Nullable="false" />
+    <Property Name="Picture" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Bookings">
     <Key>
@@ -83,7 +84,7 @@
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="CustomerId" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="BoatId" Type="int" Nullable="false" />
-    <Property Name="Review" Type="nvarchar(max)" />
+    <Property Name="Comment" Type="nvarchar(max)" />
     <Property Name="Complete" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Piers">
@@ -92,8 +93,8 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PierName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Latitude" Type="numeric" Precision="10" Scale="8" Nullable="false" />
-    <Property Name="Longitude" Type="numeric" Precision="11" Scale="8" Nullable="false" />
+    <Property Name="Latitude" Type="float" Nullable="false" />
+    <Property Name="Longitude" Type="float" Nullable="false" />
   </EntityType>
   <Association Name="FK_BoatBoatOwner">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />

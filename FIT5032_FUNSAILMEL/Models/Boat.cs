@@ -28,6 +28,7 @@ namespace FIT5032_FUNSAILMEL.Models
         public int Capacity { get; set; }
         public string BoatOwnerId { get; set; }
         public int PierId { get; set; }
+        public string Picture { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

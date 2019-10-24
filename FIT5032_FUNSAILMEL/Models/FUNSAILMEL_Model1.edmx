@@ -79,6 +79,7 @@
           <Property Name="Capacity" Type="int" Nullable="false" />
           <Property Name="BoatOwnerId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="PierId" Type="int" Nullable="false" />
+          <Property Name="Picture" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Bookings">
           <Key>
@@ -88,7 +89,7 @@
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="CustomerId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="BoatId" Type="int" Nullable="false" />
-          <Property Name="Review" Type="nvarchar(max)" />
+          <Property Name="Comment" Type="nvarchar(max)" />
           <Property Name="Complete" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Piers">
@@ -97,8 +98,8 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PierName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Latitude" Type="numeric" Precision="10" Scale="8" Nullable="false" />
-          <Property Name="Longitude" Type="numeric" Precision="11" Scale="8" Nullable="false" />
+          <Property Name="Latitude" Type="float" Nullable="false" />
+          <Property Name="Longitude" Type="float" Nullable="false" />
         </EntityType>
         <Association Name="FK_BoatBoatOwner">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
@@ -366,6 +367,7 @@
           <NavigationProperty Name="AspNetUser" Relationship="FUNSAILMEL_Model1.FK_BoatBoatOwner" FromRole="Boat" ToRole="AspNetUser" />
           <NavigationProperty Name="Bookings" Relationship="FUNSAILMEL_Model1.FK_BoatBooking" FromRole="Boat" ToRole="Booking" />
           <NavigationProperty Name="Pier" Relationship="FUNSAILMEL_Model1.FK_BoatPier" FromRole="Boat" ToRole="Pier" />
+          <Property Name="Picture" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Booking">
           <Key>
@@ -375,10 +377,10 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CustomerId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="BoatId" Type="Int32" Nullable="false" />
-          <Property Name="Review" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="FUNSAILMEL_Model1.FK_CustomerBooking" FromRole="Booking" ToRole="AspNetUser" />
           <NavigationProperty Name="Boat" Relationship="FUNSAILMEL_Model1.FK_BoatBooking" FromRole="Booking" ToRole="Boat" />
           <Property Name="Complete" Type="Boolean" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Pier">
           <Key>
@@ -387,8 +389,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PierName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Boats" Relationship="FUNSAILMEL_Model1.FK_BoatPier" FromRole="Pier" ToRole="Boat" />
-          <Property Name="Latitude" Type="Decimal" Nullable="false" Precision="10" Scale="8" />
-          <Property Name="Longitude" Type="Decimal" Nullable="false" Precision="11" Scale="8" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="FUNSAILMEL_Model1.AspNetUser" Role="AspNetUser" Multiplicity="1">
@@ -535,6 +537,7 @@
           <EntitySetMapping Name="Boats">
             <EntityTypeMapping TypeName="FUNSAILMEL_Model1.Boat">
               <MappingFragment StoreEntitySet="Boats">
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
                 <ScalarProperty Name="PierId" ColumnName="PierId" />
                 <ScalarProperty Name="BoatOwnerId" ColumnName="BoatOwnerId" />
                 <ScalarProperty Name="Capacity" ColumnName="Capacity" />
@@ -549,8 +552,8 @@
           <EntitySetMapping Name="Bookings">
             <EntityTypeMapping TypeName="FUNSAILMEL_Model1.Booking">
               <MappingFragment StoreEntitySet="Bookings">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
                 <ScalarProperty Name="Complete" ColumnName="Complete" />
-                <ScalarProperty Name="Review" ColumnName="Review" />
                 <ScalarProperty Name="BoatId" ColumnName="BoatId" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="Date" ColumnName="Date" />

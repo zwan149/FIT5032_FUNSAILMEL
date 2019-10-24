@@ -18,8 +18,8 @@ namespace FIT5032_FUNSAILMEL.Models
         public System.DateTime Date { get; set; }
         public string CustomerId { get; set; }
         public int BoatId { get; set; }
-        public string Review { get; set; }
         public bool Complete { get; set; }
+        public string Comment { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual Boat Boat { get; set; }
